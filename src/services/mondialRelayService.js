@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { log } = require('console');
 const crypto = require('crypto');
 require('dotenv').config();
 
@@ -7,11 +8,21 @@ const ENSEIGNE = process.env.ENSEIGNE;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const PAYS = "FR";
 
-async function generateSecurityHash(enseigne, pays, cp, privateKey) {
-    const concatenatedString = `${enseigne}${pays}${cp}${privateKey}`;
-    const securityParameter = crypto.createHash('md5').update(concatenatedString.toUpperCase()).digest("hex").toUpperCase();
-    return securityParameter;
+async function generateSecurityHash(enseigne, pays, codePostal, privateKey) {
+    const concatenatedString = `${enseigne}${pays}${codePostal}${privateKey}`;
+    console.log('concatstring', concatenatedString); // OK
+
+    const md5Hash = input => {
+        const hash = crypto.createHash('md5');
+        hash.update(input);
+        return hash.digest('hex').toUpperCase();
+    };
+    console.log(md5Hash(concatenatedString));
+
+    const securityHash = md5Hash(concatenatedString);
+    return securityHash;
 }
+
 
 async function getMondialRelayData(codePostal) {
     try {
