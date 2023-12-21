@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { log } = require('console');
 const crypto = require('crypto');
 require('dotenv').config();
 
