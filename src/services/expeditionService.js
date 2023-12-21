@@ -9,17 +9,21 @@ const PAYS = process.env.PAYS;
 const createShippingLabel = async (shipmentData) => {
     try {
         const response = await axios.post(
-            `${API_URL}/WSI2_CreationEtiquette`,
-            {
-                Enseigne: ENSEIGNE,
-                // Ajoutez d'autres données de l'expédition ici
-                ...shipmentData,
-            },
+            `${API_URL}`,
+            `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://www.mondialrelay.fr/webservice/">
+                <soap:Body>
+                    <WSI2_CreationEtiquette>
+                        <Enseigne>${ENSEIGNE}</Enseigne>
+                        <Pays>${PAYS}</Pays>
+                        <CP>${codePostal}</CP>
+                        <Security>${securityParameter}</Security>
+                    </WSI2_CreationEtiquette>
+                </soap:Body>
+            </soap:Envelope>`,
             {
                 headers: {
-                    PrivateKey: PRIVATE_KEY,
-                    Pays: PAYS,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/xml',
+                    SOAPAction: "http://www.mondialrelay.fr/webservice/WSI2_CreationEtiquette"
                 },
             }
         );
