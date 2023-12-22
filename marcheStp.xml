@@ -1,0 +1,33 @@
+`
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://www.mondialrelay.fr/webservice/">
+    <soap:Body>
+        <WSI2_CreationEtiquette xmlns="http://www.mondialrelay.fr/webservice/">
+            <Enseigne>BDTEST13</Enseigne>
+            <ModeCol>REL</ModeCol>
+            <ModeLiv>24X</ModeLiv>
+            <Expe_Langage>FR</Expe_Langage>
+            <Expe_Ad1>5 rue de la paix</Expe_Ad1>
+            <Expe_Ad3>Appt 123</Expe_Ad3>
+            <Expe_Ville>Paris</Expe_Ville>
+            <Expe_CP>75018</Expe_CP>
+            <Expe_Pays>FR</Expe_Pays>
+            <Expe_Tel1>04040404</Expe_Tel1>
+            <Dest_Langage>FR</Dest_Langage>
+            <Dest_Ad1>M.</Dest_Ad1>
+            <Dest_Ad3>$rue de la sauce</Dest_Ad3>
+            <Dest_Ville>marseille</Dest_Ville>
+            <Dest_CP>13001</Dest_CP>
+            <Dest_Pays>FR</Dest_Pays>
+            <Dest_Tel1>0202020202</Dest_Tel1>
+            <Poids>100</Poids>
+            <NbColis>1</NbColis>
+            <CRT_Valeur>50</CRT_Valeur>
+            <COL_Rel_Pays>FR</COL_Rel_Pays>
+            <COL_Rel>123455</COL_Rel>
+            <LIV_Rel_Pays>fr</LIV_Rel_Pays>
+            <LIV_Rel>36726</LIV_Rel>
+            <Security>1A2795029AF211482FA552DBD54DAC1E</Security>
+            <Texte>tkt la descp</Texte>
+        </WSI2_CreationEtiquette>
+    </soap:Body>
+</soap:Envelope>`
