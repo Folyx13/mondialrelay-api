@@ -28,10 +28,6 @@ const generateSecurityKey = (
     poids,
     nbColis,
     crtValeur,
-    // colRelPays,
-    // colRel,
-    // livRelPays,
-    // livRel,
 ) => {
     const concatenatedString = `${enseigne}${modeCol}${modeLiv}${expeLangage}${expeAd1}${expeAd3}${expeVille}${expeCp}${expePays}${expeTel1}${destLangage}${destAd1}${destAd3}${destVille}${destCp}${destPays}${destTel1}${poids}${nbColis}${crtValeur}`;
 
@@ -45,8 +41,8 @@ const generateSecurityKey = (
     return securityKey;
 };
 
-function genSecurityParameter(arg) {
-    const hash = crypto.createHash('md5').update(arg)
+function genSecurityParameter(string) {
+    const hash = crypto.createHash('md5').update(string)
     return hash.digest('hex').toUpperCase();
 }
 
@@ -54,88 +50,79 @@ console.log('hash = ', genSecurityParameter("BDTEST13PrivateK"))
 
 const createShippingLabel = async () => {
     const enseigne = ENSEIGNE;
-    const modeCol = 'REL';
-    // const modeLiv = '24X';
-    // const expeLangage = 'FR';
-    // const expeAd1 = '5 Rue de la Paix';
-    // const expeAd3 = 'Appt 123';
-    // const expeVille = 'Paris';
-    // const expeCp = '75001';
-    // const expePays = 'FR';
-    // const expeTel1 = '+33123456789';
-    // const destLangage = 'FR';
-    // const destAd1 = '123 Main Street';
-    // const destAd3 = 'Apt 456';
-    // const destVille = 'New York';
-    // const destCp = '10001';
-    // const destPays = 'FR';
-    // const destTel1 = '+12125551234';
-    // const poids = '1.5';
-    // const nbColis = '1';
-    // const crtValeur = '50';
-    // const colRelPays = 'FR';
-    // const colRel = '123456';
-    // const livRelPays = 'US';
-    // const livRel = '789012';
-    // const texte = 'Description de lenvoi';
+    const modeCol = 'CCC';
+    const modeLiv = 'LCC';
+    const expeLangage = 'FR';
+    const expeAd1 = 'MR DUPONT Pierrot';
+    const expeAd3 = '1 RUE DU TEST';
+    const expeVille = 'PARIS';
+    const expeCp = '75001';
+    const expePays = 'FR';
+    const expeTel1 = '0606060606';
+    const destLangage = 'FR';
+    const destAd1 = 'MR DUPONT PAUL';
+    const destAd3 = '2 RUE DU TEST';
+    const destVille = 'PARIS';
+    const destCp = '75002';
+    const destPays = 'FR';
+    const destTel1 = '0606060606';
+    const poids = '55';
+    const nbColis = '1';
+    const crtValeur = '0';
+
 
     try {
-        // const securityParameter = generateSecurityKey(
-        //     enseigne,
-        //     modeCol,
-        //     modeLiv,
-        //     expeLangage,
-        //     expeAd1,
-        //     expeAd3,
-        //     expeVille,
-        //     expeCp,
-        //     expePays,
-        //     expeTel1,
-        //     destLangage,
-        //     destAd1,
-        //     destAd3,
-        //     destVille,
-        //     destCp,
-        //     destPays,
-        //     destTel1,
-        //     poids,
-        //     nbColis,
-        //     crtValeur,
-        //     colRelPays,
-        //     colRel,
-        //     livRelPays,
-        //     livRel,
-        //     texte
-        // );
+        const securityParameter = generateSecurityKey(
+            enseigne,
+            modeCol,
+            modeLiv,
+            expeLangage,
+            expeAd1,
+            expeAd3,
+            expeVille,
+            expeCp,
+            expePays,
+            expeTel1,
+            destLangage,
+            destAd1,
+            destAd3,
+            destVille,
+            destCp,
+            destPays,
+            destTel1,
+            poids,
+            nbColis,
+            crtValeur,
+        );
 
         const response = await axios.post(
             `${API_URL}`,
             `<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://www.mondialrelay.fr/webservice/">
                     <soap:Body>
                         <WSI2_CreationEtiquette xmlns="http://www.mondialrelay.fr/webservice/">
-                            <Enseigne>${ENSEIGNE}</Enseigne>
-                            <ModeCol>CCC</ModeCol>
-                            <ModeLiv>LCC</ModeLiv>
-                            <Expe_Langage>FR</Expe_Langage>
-                            <Expe_Ad1>MRDUPONTPIERRE</Expe_Ad1>
-                            <Expe_Ad3>1RUEDUTEST</Expe_Ad3>
-                            <Expe_Ville>PARIS</Expe_Ville>
-                            <Expe_CP>75002</Expe_CP>
-                            <Expe_Pays>FR</Expe_Pays>
-                            <Expe_Tel1>0606060606</Expe_Tel1>
-                            <Dest_Langage>FR</Dest_Langage>
-                            <Dest_Ad1>MRDUPONTPAUL</Dest_Ad1>
-                            <Dest_Ad3>2RUEDUTEST</Dest_Ad3>
-                            <Dest_Ville>PARIS</Dest_Ville>
-                            <Dest_CP>75002</Dest_CP>
-                            <Dest_Pays>FR</Dest_Pays>
-                            <Dest_Tel1>0606060606</Dest_Tel1>
-                            <Poids>55</Poids>
-                            <NbColis>1</NbColis>
-                            <CRT_Valeur>0</CRT_Valeur>
-                  
+                            
 
-                            <Security>${genSecurityParameter("BDTEST13CCCLCCFRMRDUPONTPIERRE1RUEDUTESTPARIS75002FR0606060606FRMRDUPONTPAUL2RUEDUTESTPARIS75002FR06060606065510PrivateK")}</Security>
+                            <Enseigne>${enseigne}</Enseigne>
+                            <ModeCol>${modeCol}</ModeCol>
+                            <ModeLiv>${modeLiv}</ModeLiv>
+                            <Expe_Langage>${expeLangage}</Expe_Langage>
+                            <Expe_Ad1>${expeAd1}</Expe_Ad1>
+                            <Expe_Ad3>${expeAd3}</Expe_Ad3>
+                            <Expe_Ville>${expeVille}</Expe_Ville>
+                            <Expe_CP>${expeCp}</Expe_CP>
+                            <Expe_Pays>${expePays}</Expe_Pays>
+                            <Expe_Tel1>${expeTel1}</Expe_Tel1>
+                            <Dest_Langage>${destLangage}</Dest_Langage>
+                            <Dest_Ad1>${destAd1}</Dest_Ad1>
+                            <Dest_Ad3>${destAd3}</Dest_Ad3>
+                            <Dest_Ville>${destVille}</Dest_Ville>
+                            <Dest_CP>${destCp}</Dest_CP>
+                            <Dest_Pays>${destPays}</Dest_Pays>
+                            <Dest_Tel1>${destTel1}</Dest_Tel1>
+                            <Poids>${poids}</Poids>
+                            <NbColis>${nbColis}</NbColis>
+                            <CRT_Valeur>${crtValeur}</CRT_Valeur>
+                            <Security>${genSecurityParameter(`${enseigne}${modeCol}${modeLiv}${expeLangage}${expeAd1}${expeAd3}${expeVille}${expeCp}${expePays}${expeTel1}${destLangage}${destAd1}${destAd3}${destVille}${destCp}${destPays}${destTel1}${poids}${nbColis}${crtValeur}${PRIVATE_KEY}`)}</Security>
 
                         </WSI2_CreationEtiquette>Enseigne
                     </soap:Body>
