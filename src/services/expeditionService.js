@@ -46,8 +46,6 @@ function genSecurityParameter(string) {
     return hash.digest('hex').toUpperCase();
 }
 
-console.log('hash = ', genSecurityParameter("BDTEST13PrivateK"))
-
 const createShippingLabel = async () => {
     const enseigne = ENSEIGNE;
     const modeCol = 'CCC';
@@ -60,7 +58,7 @@ const createShippingLabel = async () => {
     const expePays = 'FR';
     const expeTel1 = '0606060606';
     const destLangage = 'FR';
-    const destAd1 = 'MR DUPONT PAUL';
+    const destAd1 = 'MR DUPONT Paulot';
     const destAd3 = '2 RUE DU TEST';
     const destVille = 'PARIS';
     const destCp = '75002';
@@ -101,7 +99,6 @@ const createShippingLabel = async () => {
                     <soap:Body>
                         <WSI2_CreationEtiquette xmlns="http://www.mondialrelay.fr/webservice/">
                             
-
                             <Enseigne>${enseigne}</Enseigne>
                             <ModeCol>${modeCol}</ModeCol>
                             <ModeLiv>${modeLiv}</ModeLiv>
